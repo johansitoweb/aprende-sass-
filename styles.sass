@@ -1,0 +1,94 @@
+// Instalación sass      npm install sass 
+
+// Variables  
+$primary-color: #3498db;  
+$padding: 1.5rem;  
+$font-stack: "Helvetica Neue", Arial, sans-serif;  
+$sizes: (small: 12px, medium: 16px, large: 20px);  
+$theme: (  
+  background: #ecf0f1,  
+  text: #2c3e50,  
+);  
+
+// Mixin  
+@mixin container($max-width: 1200px) {  
+  margin: 0 auto;  
+  max-width: $max-width;  
+  padding: $padding;  
+}  
+
+// Extender  
+.button {  
+  padding: 10px 15px;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+
+  &--primary {  
+    background-color: $primary-color;  
+    color: white;  
+    
+    @extend .button;  
+  }  
+}  
+
+// Listas y mapas  
+.header {  
+  background-color: map-get($theme, background);  
+  color: map-get($theme, text);  
+  @include container;  
+
+  h1 {  
+    font-family: $font-stack;  
+    font-size: nth($sizes, medium);  
+  }  
+}  
+
+// Anidamiento (nesting)  
+.nav {  
+  ul {  
+    list-style: none;  
+    
+    li {  
+      display: inline-block;  
+      margin-right: 20px;  
+
+      a {  
+        color: $primary-color;  
+        text-decoration: none;  
+
+        &:hover {  
+          text-decoration: underline;  
+        }  
+      }  
+    }  
+  }  
+}  
+
+// String y numeric  
+$base-font-size: 16px;  
+
+body {  
+  font-size: $base-font-size;  
+  line-height: 1.5;  
+}  
+
+// Colores  
+.link {  
+  color: $primary-color;  
+
+  &:hover {  
+    color: darken($primary-color, 10%);  
+  }  
+}  
+
+// Introspección  
+@for $i from 1 through length($sizes) {  
+  .size-#{$i} {  
+    font-size: nth($sizes, $i);  
+  }  
+}  
+
+// Importación  
+@import 'variables';  
+@import 'mixins';
